@@ -1,4 +1,4 @@
-package gr.aueb.cf.schoolapp.DAO;
+package gr.aueb.cf.schoolapp.dao;
 
 import java.util.List;
 import java.util.Map;

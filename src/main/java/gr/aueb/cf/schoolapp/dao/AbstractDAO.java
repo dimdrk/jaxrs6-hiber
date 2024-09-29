@@ -1,4 +1,4 @@
-package gr.aueb.cf.schoolapp.DAO;
+package gr.aueb.cf.schoolapp.dao;
 
 import gr.aueb.cf.schoolapp.model.IdentifiableEntity;
 import gr.aueb.cf.schoolapp.service.util.JPAHelper;
