@@ -20,7 +20,7 @@ public class ValidatorUtil {
 
     private ValidatorUtil() {}
 
-    public static <T extends IdentifiableEntity> List<String> validateDTO(T dto) {
+    public static <T> List<String> validateDTO(T dto) {
         Set<ConstraintViolation<T>> violations = validator.validate(dto);
         List<String> errors = new ArrayList<>();
         if (!violations.isEmpty()) {
