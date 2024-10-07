@@ -73,7 +73,7 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
     }
 
     @Override
-    public <T> List<T> getByCriteria(Class<T> clazz, Map<String, Object> criteria) {
+    public List<T> getByCriteria(Class<T> clazz, Map<String, Object> criteria) {
         EntityManager em = getEntityManager();
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<T> selectQuery = builder.createQuery(clazz);
@@ -94,7 +94,9 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
             Object value = entry.getValue();
 
             ParameterExpression<?> val = builder.parameter(value.getClass(), buildParameterAlias(key));
+//            Predicate equal = builder.equal(resolvePath(entityRoot, key), val);
             Predicate predicateLike = builder.like((Expression<String>) resolvePath(entityRoot, key), (Expression<String>) val);
+//            predicates.add(equal);
             predicates.add(predicateLike);
         }
         return predicates;
