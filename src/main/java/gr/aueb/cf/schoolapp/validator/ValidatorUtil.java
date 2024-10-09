@@ -1,6 +1,9 @@
 package gr.aueb.cf.schoolapp.validator;
 
-import jakarta.validation.*;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +19,7 @@ public class ValidatorUtil {
         try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
             validator = factory.getValidator();
         } catch (Exception e) {
-            LOGGER.error("Error. Validator can not be initialize") ;
+            LOGGER.error("Error. Validator can not be initialized");
             throw e;
         }
     }

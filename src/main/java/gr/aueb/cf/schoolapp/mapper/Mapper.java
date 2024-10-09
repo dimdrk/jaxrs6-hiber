@@ -16,11 +16,11 @@ public class Mapper {
     private Mapper() {}
 
     public static Teacher mapToTeacher(TeacherInsertDTO dto) {
-        return new Teacher(null, dto.getVat(), dto.getFirstName(), dto.getLastName());
+        return new Teacher(null, dto.getVat(), dto.getFirstname(), dto.getLastname());
     }
 
     public static Teacher mapToTeacher(TeacherUpdateDTO dto) {
-        return new Teacher(dto.getId(), dto.getVat(), dto.getFirstName(), dto.getLastName());
+        return new Teacher(dto.getId(), dto.getVat(), dto.getFirstname(), dto.getLastname());
     }
 
     public static TeacherReadOnlyDTO mapToTeacherReadOnlyDTO(Teacher teacher) {
@@ -31,18 +31,18 @@ public class Mapper {
         return teachers.stream().map(Mapper::mapToTeacherReadOnlyDTO).collect(Collectors.toList());
     }
 
-    public static Map<String, Object> mapToCriteria(TeacherFiltersDTO filtersDTO) {
-        Map<String, Object> filters = new HashMap<>();
+    public static Map<String , Object> mapToCriteria(TeacherFiltersDTO filtersDTO) {
+        Map<String , Object> filters = new HashMap<>();
 
-        if (!(filtersDTO.getFirstname() == null) && !(filtersDTO.getFirstname().isEmpty())) {
+        if (filtersDTO.getFirstname() != null && !filtersDTO.getFirstname().isEmpty()) {
             filters.put("firstname", filtersDTO.getFirstname());
         }
 
-        if (!(filtersDTO.getLastname() == null) && !(filtersDTO.getLastname().isEmpty())) {
+        if (filtersDTO.getLastname() != null && !filtersDTO.getLastname().isEmpty()) {
             filters.put("lastname", filtersDTO.getLastname());
         }
 
-        if (!(filtersDTO.getVat() == null) && !(filtersDTO.getVat().isEmpty())) {
+        if (filtersDTO.getVat() != null && !filtersDTO.getVat().isEmpty()) {
             filters.put("vat", filtersDTO.getVat());
         }
         return filters;

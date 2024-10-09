@@ -41,11 +41,13 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
         em.merge(t);
         return Optional.of(t);
     }
+
 //        Optional<T> updated = getById(t.getId());
 //        if (updated.isPresent()) {
 //            em.merge(t);
 //            return Optional.of(t);
 //        }
+
 //        return Optional.empty();
 //    }
 
@@ -69,7 +71,7 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
 
     @Override
     public List<? extends T> getByCriteria(Map<String, Object> criteria) {
-        return List.of();   // to do
+        return getByCriteria(getPersistenceClass(), criteria);
     }
 
     @Override
@@ -83,10 +85,13 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
         selectQuery.select(entityRoot).where(predicates.toArray(new Predicate[0]));
         TypedQuery<T> query = em.createQuery(selectQuery);
         addParametersToQuery(query, criteria);
-        return query.getResultList();
+        List<T> entitiesToReturn = query.getResultList();
+        if (entitiesToReturn != null) System.out.println("IN getByCriteriaDAO" + Arrays.toString(entitiesToReturn.toArray()));
+        else System.out.println("IS NULL");
+        return  entitiesToReturn;
     }
 
-    protected List<Predicate> getPredicatesList(CriteriaBuilder builder, Root<T> entityRoot, Map<String, Object> criteria) {
+    protected List<Predicate> getPredicatesList(CriteriaBuilder builder, Root<T> entityRoot, Map<String , Object> criteria) {
         List<Predicate> predicates = new ArrayList<>();
 
         for (Map.Entry<String, Object> entry : criteria.entrySet()) {
@@ -100,6 +105,7 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
             predicates.add(predicateLike);
         }
         return predicates;
+
     }
 
     protected Path<?> resolvePath(Root<?> root, String expression) {
@@ -111,16 +117,17 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
         return path;
     }
 
-    protected void addParametersToQuery(TypedQuery<?> query, Map<String, Object> criteria) {
-        for (Map.Entry<String, Object> entry : criteria.entrySet()) {
+    protected void addParametersToQuery(TypedQuery<?> query, Map<String , Object> criteria) {
+        for (Map.Entry<String , Object> entry : criteria.entrySet()) {
             Object value = entry.getValue();
-            query.setParameter(buildParameterAlias(entry.getKey()), value);
+            query.setParameter(buildParameterAlias(entry.getKey()), value + "%");
         }
     }
 
     protected String buildParameterAlias(String alias) {
         return alias.replaceAll("\\.", "");
     }
+
 
     public EntityManager getEntityManager() {
         return JPAHelper.getEntityManager();

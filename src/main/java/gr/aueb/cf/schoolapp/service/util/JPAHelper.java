@@ -21,10 +21,11 @@ public class JPAHelper {
 
     public static EntityManager getEntityManager() {
         EntityManager em = threadLocal.get();
-        if (em == null || !em.isOpen()) {
+        if (em == null || !em.isOpen())  {
             em = getEntityManagerFactory().createEntityManager();
             threadLocal.set(em);
         }
+
         return em;
     }
 

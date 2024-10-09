@@ -4,7 +4,6 @@ import gr.aueb.cf.schoolapp.model.Teacher;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.ws.rs.ext.Provider;
 
 import java.util.Optional;
 

@@ -36,10 +36,10 @@ public class TeacherRestController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addTeacher(TeacherInsertDTO insertDTO, @Context UriInfo uriInfo)
-    throws EntityInvalidArgumentException, EntityAlreadyExistsException {
+            throws EntityInvalidArgumentException, EntityAlreadyExistsException {
         List<String> errors = ValidatorUtil.validateDTO(insertDTO);
         if (!errors.isEmpty()) {
-            throw new EntityInvalidArgumentException("Teacher", String.join(", ", errors));
+            throw new EntityInvalidArgumentException("Teacher", String.join("\n", errors));
         }
         TeacherReadOnlyDTO readOnlyDTO = teacherService.insertTeacher(insertDTO);
         return Response.created(uriInfo.getAbsolutePathBuilder().path(readOnlyDTO.getId().toString()).build())
@@ -51,7 +51,8 @@ public class TeacherRestController {
     @Path("/{teacherId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateTeacher(@PathParam("teacherId") Long teacherId, TeacherUpdateDTO updateDTO)
+    public Response updateTeacher(@PathParam("teacherId") Long teacherId,
+                                  TeacherUpdateDTO updateDTO)
             throws EntityInvalidArgumentException, EntityNotFoundException {
         List<String> errors = ValidatorUtil.validateDTO(updateDTO);
         if (!errors.isEmpty()) {
