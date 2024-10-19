@@ -4,14 +4,14 @@ import gr.aueb.cf.schoolapp.dao.IUserDAO;
 import gr.aueb.cf.schoolapp.dao.UserDAOImpl;
 import gr.aueb.cf.schoolapp.dto.UserInsertDTO;
 import gr.aueb.cf.schoolapp.service.IUserService;
-import gr.aueb.cf.schoolapp.service.UserServiceImp;
+import gr.aueb.cf.schoolapp.service.UserServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserInputValidator {
     private static final IUserDAO userDAO = new UserDAOImpl();
-    private static final IUserService userService = new UserServiceImp(userDAO);
+    private static final IUserService userService = new UserServiceImpl(userDAO);
 
     private UserInputValidator() {
 

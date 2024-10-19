@@ -13,7 +13,8 @@ import java.security.Principal;
 @Setter
 @Builder
 @Table(name = "users")
-public class User extends AbstractEntity implements IdentifiableEntity, Principal {
+public class User extends AbstractEntity
+        implements IdentifiableEntity, Principal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +27,6 @@ public class User extends AbstractEntity implements IdentifiableEntity, Principa
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
-
-
 
     @Override
     public String getName() {

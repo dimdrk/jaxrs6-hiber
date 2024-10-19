@@ -70,7 +70,7 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
     }
 
     @Override
-    public List<? extends T> getByCriteria(Map<String, Object> criteria) {
+    public List<T> getByCriteria(Map<String, Object> criteria) {
         return getByCriteria(getPersistenceClass(), criteria);
     }
 
@@ -108,7 +108,7 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> implements IGene
 
     }
 
-    protected Path<?> resolvePath(Root<?> root, String expression) {
+    protected Path<?> resolvePath(Root<T> root, String expression) {
         String[] fields = expression.split("\\.");
         Path<?> path = root.get(fields[0]);
         for (int i = 1; i < fields.length; i++) {

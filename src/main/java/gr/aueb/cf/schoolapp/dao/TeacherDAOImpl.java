@@ -16,14 +16,14 @@ public class TeacherDAOImpl extends AbstractDAO<Teacher> implements ITeacherDAO 
 
     @Override
     public Optional<Teacher> getByVat(String vat) {
-        EntityManager em =getEntityManager();
+        EntityManager em = getEntityManager();
         String sql = "SELECT t FROM Teacher t WHERE t.vat = :vat";
 
         try {
-        Teacher teacher = em.createQuery(sql, Teacher.class)
-                .setParameter("vat", vat)
-                .getSingleResult();
-        return Optional.of(teacher);
+            Teacher teacher = em.createQuery(sql, Teacher.class)
+                    .setParameter("vat", vat)
+                    .getSingleResult();
+            return Optional.of(teacher);
         } catch (NoResultException e) {
             return Optional.empty();
         }

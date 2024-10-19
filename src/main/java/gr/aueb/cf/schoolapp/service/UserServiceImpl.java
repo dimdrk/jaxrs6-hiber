@@ -2,7 +2,6 @@ package gr.aueb.cf.schoolapp.service;
 
 import gr.aueb.cf.schoolapp.core.exceptions.AppServerException;
 import gr.aueb.cf.schoolapp.core.exceptions.EntityNotFoundException;
-import gr.aueb.cf.schoolapp.core.exceptions.EntityInvalidArgumentException;
 import gr.aueb.cf.schoolapp.dao.IUserDAO;
 import gr.aueb.cf.schoolapp.dto.UserInsertDTO;
 import gr.aueb.cf.schoolapp.dto.UserReadOnlyDTO;
@@ -12,16 +11,14 @@ import gr.aueb.cf.schoolapp.service.util.JPAHelper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 // @Slf4j  ---> private static final Logger log = LoggerFactory.getLogger(UserServiceImp .class);
-public class UserServiceImp implements IUserService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImp .class);
+public class UserServiceImpl implements IUserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final IUserDAO userDAO;
 
     @Override

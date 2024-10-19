@@ -50,7 +50,7 @@ public class AuthRestController {
             throw new EntityInvalidArgumentException("User", String.join(", ", beanErrors));
         }
 
-        Map<String, String > otherErrors = UserInputValidator.validate(userInsertDTO);
+        Map<String , String > otherErrors = UserInputValidator.validate(userInsertDTO);
         if (!otherErrors.isEmpty()) {
             throw new EntityInvalidArgumentException("User", otherErrors.toString());
         }
@@ -74,7 +74,7 @@ public class AuthRestController {
         if (principal != null) {
             String username = principal.getName();
             if (loginDTO.getUsername().equals(username)) {
-                return Response.status(Response.Status.OK).entity("Already authenticated.").build();
+                return Response.status(Response.Status.OK).entity("Already authenticated").build();
             }
         }
 
